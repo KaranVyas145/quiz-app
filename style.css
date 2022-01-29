@@ -1,55 +1,95 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.container{
-    width: 80%;
-    border: 12px solid black;
-    padding: 2rem;
+.container {
+  width: 80%;
+  border: 12px solid black;
+  padding: 2rem;
 }
 
-.timer{
-    border: 12px solid black;
-    border-radius: 50%;
-    padding: 1rem;
-    position: relative;
-    top: 10px;
-}
-.container ul{
-    /* border: 2px solid black; */
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    padding: 20px;
-    grid-gap: 10px;
+.container ul {
+  /* border: 2px solid black; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 20px;
+  grid-gap: 10px;
+  width: 100%;
+  height: 200px;
 }
 
-.container ul li{
-    border: 2px solid black;
-    width: 100%;
-    padding: 10px;
-    list-style: none;
-    text-align: center;
+.container ul li {
+  border: 2px solid black;
+  width: 100%;
+  padding: 10px;
+  list-style: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.btn{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.quizBtn{
-    margin: 1rem;
-    padding: 0.5rem;
-    font-size: 1.2rem;
+.quizBtn {
+  margin: 1rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.timer-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border-radius: 50%; */
+
+  position: relative;
+  top: 10px;
+  width: 80%;
+}
+
+.timer,
+.score {
+  border: 12px solid black;
+  padding: 1rem;
+}
+
+.correct {
+  /* background-color: chartreuse; */
+  color: green;
+  width: 100%;
+  grid-column: span 2;
+  grid-row: span 2;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrong {
+    /* background-color: red; */
+  width: 100%;
+  grid-column: span 2;
+  grid-row: span 2;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  color: red;
 }
