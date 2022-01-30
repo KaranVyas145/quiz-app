@@ -105,21 +105,19 @@ body {
   background-color: black;
   width: 500vw;
   color: white;
-  font-size: 3rem;
-  /* display: none; */
+  font-size: 2rem;
   flex-direction: column;
  
 }
 
 .intro-fade{
-  animation: intro 1s linear;
+  animation: intro 0.5s linear;
   visibility: collapse;
 }
 
 @keyframes intro {
   0%{
     opacity: 1;
-    /* display: flex; */
     visibility: visible;
     transform: scale(1);
   }
@@ -129,7 +127,11 @@ body {
   }
   100%{
     opacity: 0;
-    /* display: none; */
     transform: scale(100);
   }
+}
+
+.startbtn{
+  padding: 10px;
+  margin: 10px;
 }
