@@ -4,7 +4,14 @@ const optionsel = document.querySelector(".options");
 const nextbtn = document.querySelector(".quizBtn");
 const scoreel = document.querySelector(".score");
 const timerel = document.querySelector(".timer");
-const startbtn = document.querySelector(".start");
+const startbtn = document.querySelector(".startbtn");
+
+startbtn.addEventListener("click",()=>{
+  console.log("hello");
+  document.querySelector(".intro").classList.add("intro-fade");
+  quiz();
+  index++;
+})
 let index = 0;
 let score = 0;
 let timer = 60;
@@ -37,11 +44,8 @@ xhr.addEventListener("readystatechange", function () {
 
 // The main quiz function
 function quiz() {
+  nextbtn.innerText="Next Question";
   clearInterval(myTimer);
-  if (xhr.readyState < 4) {
-    // loader
-    questionel.innerText = `loading`;
-  } else {
     // resetting the timer on new question
     timer = 60;
 
@@ -126,12 +130,13 @@ function quiz() {
       questionel.innerText = `GAME OVER`;
       optionsel.innerHTML = `SCORE: ${score}`;
       clearInterval(myTimer);
+      nextbtn.innerText="Restart";
       nextbtn.addEventListener("click", () => {
         window.location.reload();
       });
     }
   }
-}
+
 
 function timeOut() {
   optionsel.innerHTML = "TIME OUT";

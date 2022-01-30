@@ -10,6 +10,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .container {
@@ -89,4 +90,46 @@ body {
   color: white;
   font-weight: 600;
   color: red;
+}
+
+.instruction{
+  grid-column: span 2;
+}
+
+.intro{
+  height: 500vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  width: 500vw;
+  color: white;
+  font-size: 3rem;
+  /* display: none; */
+  flex-direction: column;
+ 
+}
+
+.intro-fade{
+  animation: intro 1s linear;
+  visibility: collapse;
+}
+
+@keyframes intro {
+  0%{
+    opacity: 1;
+    /* display: flex; */
+    visibility: visible;
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    /* display: none; */
+    transform: scale(100);
+  }
 }
