@@ -243,4 +243,8 @@ body {
   .timer-score{
     width: 90%;
   }
+
+  .correct, .wrong, .time-out{
+    font-size: 1.2rem;
+  }
 }
