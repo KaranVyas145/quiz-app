@@ -106,6 +106,7 @@ function quiz() {
         optionsel.innerHTML =optionsel.innerHTML+ ` <li class="answers">${element}</li>`;
       }
     });
+    
 
     const options = document.querySelectorAll(".answers");
     // creating event listener for each option
