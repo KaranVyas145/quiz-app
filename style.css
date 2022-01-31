@@ -39,8 +39,9 @@ body {
   padding: 20px;
   grid-gap: 10px;
   width: 100%;
-  min-height: 30vh;
-  /* overflow: scroll; */
+  min-height: 50vh;
+  max-height: 50vh;
+  overflow: scroll;
 }
 
 .container ul li {
@@ -116,6 +117,19 @@ body {
   font-size: 2rem;
 }
 
+.time-out{
+  width: 100%;
+  grid-column: span 2;
+  grid-row: span 2;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e72f58;
+  text-shadow: 15px;
+  font-size: 2rem;
+}
+
 .instruction{
   grid-column: span 2;
 }
@@ -131,7 +145,15 @@ body {
   width: 500vw;
   color: black;
   font-size: 2rem;
+}
+
+.intro-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+  max-width:90vw;
+  text-align: center;
 }
 
 
@@ -175,4 +197,50 @@ body {
 
 .bg-correct{
   background-color: #2bffb8;
+}
+
+.final-score{
+  font-size: 2rem;
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1000px ) {
+  .intro{
+    font-size: 1.5rem;
+  }
+
+  .container{
+    width: 80%;
+  }
+
+  .container .question{
+    height: 15vh;
+  }  
+  .container ul{
+    min-height: 40vh;
+    overflow: scroll;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .intro{
+    font-size: 1rem;
+  }
+  
+  .startbtn{
+    padding: 15px;
+  }
+  
+  .container{
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .timer-score{
+    width: 90%;
+  }
 }

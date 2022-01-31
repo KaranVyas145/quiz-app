@@ -7,7 +7,6 @@ const timerel = document.querySelector(".timer");
 const startbtn = document.querySelector(".startbtn");
 const bg = document.querySelector("body");
 startbtn.addEventListener("click", () => {
-  console.log("hello");
   document.querySelector(".intro").classList.add("intro-fade");
   quiz();
   index++;
@@ -31,14 +30,17 @@ nextbtn.addEventListener("click", () => {
 const xhr = new XMLHttpRequest();
 xhr.open(
   "GET",
-  "https://quizapi.io/api/v1/questions?apiKey=P78OZ7PoZ0rpiqkz4ZglxxDWPtSe2I0OUtRUjl8W&category=sql&limit=10&tags=MySQL"
+  "https://quizapi.io/api/v1/questions?apiKey=P78OZ7PoZ0rpiqkz4ZglxxDWPtSe2I0OUtRUjl8W&category=linux&limit=10"
 );
 
 xhr.send();
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === this.DONE) {
     data = JSON.parse(xhr.responseText);
-    console.log(data);
+    quiz();
+  }
+  else{
+    optionsel.innerHTML="loading";
   }
 });
 
@@ -152,8 +154,12 @@ function quiz() {
       });
     });
   } else {
-    questionel.innerText = `GAME OVER`;
-    optionsel.innerHTML = `SCORE: ${score}`;
+    questionel.innerHTML=``;
+    optionsel.innerHTML = `
+    <div class="final-score">FINAL SCORE : ${score}</div>
+    `;
+    scoreel.setAttribute("style","visibility:hidden");
+    timerel.setAttribute("style","visibility:hidden");
     clearInterval(myTimer);
     nextbtn.innerText = "Restart";
     nextbtn.addEventListener("click", () => {
@@ -163,8 +169,12 @@ function quiz() {
 }
 
 function timeOut() {
-  optionsel.innerHTML = "TIME OUT";
+  optionsel.innerHTML = `
+  <div class="time-out">TIME OUT</div>
+  `;
+  bg.classList.add('bg-wrong')
 }
+
 
 function intervalFuntion() {
   if (timer > 0) {
