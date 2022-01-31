@@ -5,13 +5,13 @@ const nextbtn = document.querySelector(".quizBtn");
 const scoreel = document.querySelector(".score");
 const timerel = document.querySelector(".timer");
 const startbtn = document.querySelector(".startbtn");
-
-startbtn.addEventListener("click",()=>{
+const bg = document.querySelector("body");
+startbtn.addEventListener("click", () => {
   console.log("hello");
   document.querySelector(".intro").classList.add("intro-fade");
   quiz();
   index++;
-})
+});
 let index = 0;
 let score = 0;
 let timer = 60;
@@ -44,99 +44,123 @@ xhr.addEventListener("readystatechange", function () {
 
 // The main quiz function
 function quiz() {
-  nextbtn.innerText="Next Question";
+  if (bg.classList.contains("bg-wrong")) {
+    bg.classList.remove("bg-wrong");
+  }
+  if (bg.classList.contains("bg-correct")) {
+    bg.classList.remove("bg-correct");
+  }
+  nextbtn.innerText = "Next Question";
   clearInterval(myTimer);
-    // resetting the timer on new question
-    timer = 60;
+  // resetting the timer on new question
+  timer = 60;
 
-    // setinterval to control the timer
-    myTimer = setInterval(intervalFuntion, intervalTime);
+  // setinterval to control the timer
+  myTimer = setInterval(intervalFuntion, intervalTime);
 
-    // data = JSON.parse(xhr.responseText);
-    console.log(data);
-    if (index < 10) {
-      // console.log(data[0].question);
-      questionel.innerText = `${index + 1} ${data[index].question}`;
+  // data = JSON.parse(xhr.responseText);
+  console.log(data);
+  if (index < 10) {
+    // console.log(data[0].question);
+    questionel.innerText = `${index + 1}. ${data[index].question}`;
 
-      let correctOptions = data[index].correct_answers;
+    let correctOptions = data[index].correct_answers;
 
-      let correctOptionsArray = [
-        correctOptions.answer_a_correct,
-        correctOptions.answer_b_correct,
-        correctOptions.answer_c_correct,
-        correctOptions.answer_d_correct,
-      ];
+    let correctOptionsArray = [
+      correctOptions.answer_a_correct,
+      correctOptions.answer_b_correct,
+      correctOptions.answer_c_correct,
+      correctOptions.answer_d_correct,
+    ];
 
-      // console.log(correctOptionsArray);
+    // console.log(correctOptionsArray);
 
-      correctOptionsArray.forEach((element, i) => {
-        if (element === "true") {
-          switch (i) {
-            case 0:
-              correctAnswer = data[index].answers.answer_a;
-              break;
-            case 1:
-              correctAnswer = data[index].answers.answer_b;
-              break;
-            case 2:
-              correctAnswer = data[index].answers.answer_c;
-              break;
-            case 3:
-              correctAnswer = data[index].answers.answer_d;
-              break;
-          }
+    correctOptionsArray.forEach((element, i) => {
+      if (element === "true") {
+        switch (i) {
+          case 0:
+            correctAnswer = data[index].answers.answer_a;
+            break;
+          case 1:
+            correctAnswer = data[index].answers.answer_b;
+            break;
+          case 2:
+            correctAnswer = data[index].answers.answer_c;
+            break;
+          case 3:
+            correctAnswer = data[index].answers.answer_d;
+            break;
         }
-      });
+      }
+    });
 
-      optionsel.innerHTML = `
-    <li class="answers">${data[index].answers.answer_a}</li>
-    <li class="answers">${data[index].answers.answer_b}</li>
-    <li class="answers">${data[index].answers.answer_c}</li>
-    <li class="answers">${data[index].answers.answer_d}</li>
-    `;
-      // creating and inserting options
-      const options = document.querySelectorAll(".answers");
-      console.log(correctAnswer);
-      // creating event listener for each option
-      options.forEach((element) => {
-        element.addEventListener("click", (e) => {
-          console.log(e.target.innerHTML);
-          // let correctAnswer = data[index].correct_answer;
-          // console.log(correctAnswer);
-          // console.log(data[index].answers[correctAnswer]);
-          // data[index - 1].answers[correctAnswer]
+    let optionsArray = [
+      data[index].answers.answer_a,
+      data[index].answers.answer_b,
+      data[index].answers.answer_c,
+      data[index].answers.answer_d,
+    ];
 
-          if (e.target.innerHTML === correctAnswer) {
-            console.log("right");
-            optionsel.innerHTML = `<div class="correct">CORRECT ANSWER</div>`;
-            score++;
-            clearInterval(myTimer);
-            // index++;
-          } else {
-            optionsel.innerHTML = `<div class="wrong">WRONG ANSWER
+    optionsel.innerHTML=``;
+
+    optionsArray.forEach(element => {
+      if(element!=null){
+        console.log(element);
+        optionsel.innerHTML =optionsel.innerHTML+ ` <li class="answers">${element}</li>`;
+      }
+    });
+
+    // optionsel.innerHTML = `
+    // <li class="answers">${data[index].answers.answer_a}</li>
+    // <li class="answers">${data[index].answers.answer_b}</li>
+    // <li class="answers">${data[index].answers.answer_c}</li>
+    // <li class="answers">${data[index].answers.answer_d}</li>
+    // `;
+    // creating and inserting options
+    const options = document.querySelectorAll(".answers");
+    console.log(correctAnswer);
+    // creating event listener for each option
+    options.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        console.log(e.target.innerHTML);
+        // let correctAnswer = data[index].correct_answer;
+        // console.log(correctAnswer);
+        // console.log(data[index].answers[correctAnswer]);
+        // data[index - 1].answers[correctAnswer]
+
+        if (e.target.innerHTML === correctAnswer) {
+          console.log("right");
+          optionsel.innerHTML = `<div class="correct">CORRECT ANSWER</div>`;
+          score++;
+          clearInterval(myTimer);
+          bg.classList.add("bg-correct");
+          // index++;
+        } else {
+          optionsel.innerHTML = `<div class="wrong">WRONG ANSWER
                     <br>
                     The correct answer is
-                      ${correctAnswer};
+                      ${correctAnswer}
                     </div>`;
-            console.log("wrong");
-            clearInterval(myTimer);
-            // index++;
-          }
-          scoreel.innerText = `Score : ${score}`;
-          // timerel.innerText = `${timer}`;
-        });
-      });
-    } else {
-      questionel.innerText = `GAME OVER`;
-      optionsel.innerHTML = `SCORE: ${score}`;
-      clearInterval(myTimer);
-      nextbtn.innerText="Restart";
-      nextbtn.addEventListener("click", () => {
-        window.location.reload();
-      });
-    }
-  }
+          console.log("wrong");
+          bg.classList.add("bg-wrong");
+          clearInterval(myTimer);
+          // index++;
+        }
 
+        scoreel.innerText = `Score : ${score}`;
+        // timerel.innerText = `${timer}`;
+      });
+    });
+  } else {
+    questionel.innerText = `GAME OVER`;
+    optionsel.innerHTML = `SCORE: ${score}`;
+    clearInterval(myTimer);
+    nextbtn.innerText = "Restart";
+    nextbtn.addEventListener("click", () => {
+      window.location.reload();
+    });
+  }
+}
 
 function timeOut() {
   optionsel.innerHTML = "TIME OUT";
