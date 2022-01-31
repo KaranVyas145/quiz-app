@@ -40,6 +40,7 @@ xhr.addEventListener("readystatechange", function () {
     quiz();
   }
   else{
+    data='';
     optionsel.innerHTML="loading";
   }
 });
@@ -60,10 +61,7 @@ function quiz() {
   // setinterval to control the timer
   myTimer = setInterval(intervalFuntion, intervalTime);
 
-  // data = JSON.parse(xhr.responseText);
-  console.log(data);
   if (index < 10) {
-    // console.log(data[0].question);
     questionel.innerText = `${index + 1}. ${data[index].question}`;
 
     let correctOptions = data[index].correct_answers;
@@ -74,8 +72,6 @@ function quiz() {
       correctOptions.answer_c_correct,
       correctOptions.answer_d_correct,
     ];
-
-    // console.log(correctOptionsArray);
 
     correctOptionsArray.forEach((element, i) => {
       if (element === "true") {
@@ -107,50 +103,33 @@ function quiz() {
 
     optionsArray.forEach(element => {
       if(element!=null){
-        console.log(element);
         optionsel.innerHTML =optionsel.innerHTML+ ` <li class="answers">${element}</li>`;
       }
     });
 
-    // optionsel.innerHTML = `
-    // <li class="answers">${data[index].answers.answer_a}</li>
-    // <li class="answers">${data[index].answers.answer_b}</li>
-    // <li class="answers">${data[index].answers.answer_c}</li>
-    // <li class="answers">${data[index].answers.answer_d}</li>
-    // `;
-    // creating and inserting options
     const options = document.querySelectorAll(".answers");
-    console.log(correctAnswer);
     // creating event listener for each option
     options.forEach((element) => {
       element.addEventListener("click", (e) => {
-        console.log(e.target.innerHTML);
-        // let correctAnswer = data[index].correct_answer;
-        // console.log(correctAnswer);
-        // console.log(data[index].answers[correctAnswer]);
-        // data[index - 1].answers[correctAnswer]
 
         if (e.target.innerHTML === correctAnswer) {
-          console.log("right");
           optionsel.innerHTML = `<div class="correct">CORRECT ANSWER</div>`;
           score++;
           clearInterval(myTimer);
           bg.classList.add("bg-correct");
-          // index++;
+
         } else {
           optionsel.innerHTML = `<div class="wrong">WRONG ANSWER
                     <br>
                     The correct answer is
                       ${correctAnswer}
                     </div>`;
-          console.log("wrong");
           bg.classList.add("bg-wrong");
           clearInterval(myTimer);
-          // index++;
+
         }
 
         scoreel.innerText = `Score : ${score}`;
-        // timerel.innerText = `${timer}`;
       });
     });
   } else {

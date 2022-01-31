@@ -41,7 +41,7 @@ body {
   width: 100%;
   min-height: 50vh;
   max-height: 50vh;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .container ul li {
@@ -223,7 +223,7 @@ body {
   }  
   .container ul{
     min-height: 40vh;
-    overflow: scroll;
+    overflow-y: scroll;
     grid-template-columns: 1fr;
   }
 }
