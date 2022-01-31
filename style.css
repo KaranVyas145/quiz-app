@@ -135,14 +135,14 @@ body {
 }
 
 .intro{
-  height: 500vh;
+  height: 100vh;
   position: absolute;
   display: visible;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #fc93f2;
-  width: 500vw;
+  width: 100vw;
   color: black;
   font-size: 2rem;
 }
@@ -171,6 +171,8 @@ body {
   50%{
     transform: scale(0.5);
     opacity: 1;
+    height: 500vh;
+    width: 500vh;
   }
   100%{
     opacity: 0;
@@ -238,6 +240,10 @@ body {
   .container{
     width: 90%;
     padding: 1rem;
+  }
+
+  .container .question{
+    font-size: 1.1rem;
   }
 
   .timer-score{
